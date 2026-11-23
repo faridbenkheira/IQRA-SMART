@@ -1,0 +1,49 @@
+GUIDE — LICENCES COMMERCIALES HSE Pro+ (V13.40)
+
+PRINCIPE
+- Chaque clé d'activation est signée (ECDSA P-256) avec VOTRE clé privée. L'application ne contient que la clé publique :
+  elle peut vérifier une clé mais ne peut pas en fabriquer. Fonctionne hors connexion.
+- Une clé contient : organisation (empreinte), édition, nombre maximum d'utilisateurs, date d'émission, échéance
+  (ou perpétuelle), numéro de série. Elle est liée au nom de l'organisation saisi à l'activation.
+- Éditions (modifiables dans index.html, bloc « hse-v1339-licence », constantes BASE / PRO) :
+  Essentiel = modules de base ; Professionnel = + environnement, santé, HAZOP, arbre des causes, HACCP/BPH, audits clients ;
+  Entreprise = tout, dont ISO 9001/14001/45001/22000. Les modules non inclus sont verrouillés (🔒).
+- Essai gratuit : 60 jours par défaut (1, 2 ou 3 mois au choix dans le générateur), toutes fonctions, 5 utilisateurs.
+
+MISE EN SERVICE (une seule fois)
+1. Ouvrir OUTILS_VENDEUR_NE_PAS_LIVRER/Generateur_Licences.html dans un navigateur.
+2. « Générer une nouvelle paire de clés », puis « Sauvegarder la clé privée » (coffre sûr, à ne jamais livrer).
+3. « Télécharger licence-config.js » et le placer dans le dossier de l'application (remplace le fichier fourni).
+   Tant que ce fichier contient publicKey:null, l'application reste en « mode développement » sans contrôle.
+
+POUR CHAQUE CLIENT
+1. Dans le générateur : nom exact de l'organisation, édition, nombre d'utilisateurs, durée -> « Générer la clé ».
+2. Envoyer au client la clé (ou le fichier .hselic) et le nom exact de l'organisation.
+3. Le client saisit nom + clé (ou importe le .hselic) à l'ouverture de l'application. Le registre des licences émises
+   est conservé dans le générateur (export CSV).
+4. Livrer au client : le dossier de l'application SANS le dossier OUTILS_VENDEUR_NE_PAS_LIVRER et SANS source_project.
+
+LIMITES À CONNAÎTRE
+- Application 100 % locale : un développeur déterminé peut modifier le code JavaScript pour supprimer le contrôle.
+  Ce dispositif décourage le partage occasionnel de copies ; pour une protection forte (révocation, liaison à un
+  appareil, essai infalsifiable), il faut un serveur de licences et une version minifiée/obfusquée.
+- L'essai gratuit est mémorisé dans le navigateur : vider les données du navigateur le relance.
+- Une clé ne peut pas être révoquée à distance ; utilisez des durées de 12 mois renouvelables.
+- Si vous perdez la clé privée, régénérez une paire, remplacez licence-config.js et réémettez les licences.
+
+
+V14.00 — GÉNÉRATEUR ET FORMULES COMMERCIALES
+- Le générateur est dans le dossier OUTILS_VENDEUR_NE_PAS_LIVRER (livré à part, jamais chez le client) : Generateur_Licences.html, à ouvrir dans Chrome ou Edge.
+- Formules prévues : Essai (1 à 3 mois, toutes fonctions) · Professionnel annuel · Entreprise annuel · Essentiel annuel · Illimitée (sans échéance).
+  Durée et nombre d'utilisateurs restent modifiables à chaque émission.
+- Le générateur contient aussi : la vérification d'une clé, le fichier .hselic à envoyer au client, un message prêt à copier et le registre des licences (export CSV / JSON).
+- IMPORTANT : tant que licence-config.js contient publicKey:null, l'application n'est PAS protégée. Générez vos clés, remplacez licence-config.js dans le dossier de l'application, puis seulement livrez.
+- Renouvellement annuel : émettre une nouvelle clé pour la même organisation et la faire saisir par le client.
+
+
+V14.23 — LIAISON À L'ORDINATEUR ET ESSAI
+1. Le client installe le .exe et vous communique l'identifiant de l'ordinateur (8 caractères) affiché à l'activation.
+2. Dans le générateur : choisir la formule, saisir le nom exact de l'organisation et cet identifiant, puis générer la clé.
+3. Une clé liée refuse de s'activer sur un autre ordinateur (message explicite). Un changement d'ordinateur demande une nouvelle clé.
+4. Une clé liée ne fonctionne pas dans un navigateur ordinaire : uniquement dans le .exe.
+5. Essai : date de début mémorisée dans le navigateur interne ET dans un fichier du dossier utilisateur (hse-essai.json), liée à l'ordinateur.
