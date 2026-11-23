@@ -7,6 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Organiser les fichiers
+        run: |
+          mkdir -p app/src/main/java/com/iqrasmart/app app/src/main/assets
+          mv MainActivity.kt app/src/main/java/com/iqrasmart/app/MainActivity.kt
+          mv AndroidManifest.xml app/src/main/AndroidManifest.xml
+          mv app.build.gradle.kts app/build.gradle.kts
+          cp index.html app/src/main/assets/index.html
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
