@@ -1,0 +1,9 @@
+IQRA SMART - construction de l'APK sur GitHub (rien a installer sur le PC)
+
+1. Creer un compte sur github.com puis un nouveau depot (New repository), nom : iqra, Public.
+2. Cliquer sur "uploading an existing file".
+3. Glisser TOUT LE CONTENU de ce dossier (pas le dossier lui-meme) : app, gradle, .github, build.gradle.kts, settings.gradle.kts, gradle.properties...
+4. Cliquer sur "Commit changes".
+5. Onglet "Actions" > "Build APK" > attendre la coche verte (5 a 10 minutes).
+6. Ouvrir l'execution terminee > "Artifacts" > telecharger IQRA-SMART-apk (zip contenant app-debug.apk).
+7. Envoyer l'APK sur le telephone et l'installer.
